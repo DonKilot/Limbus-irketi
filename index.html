@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -19,6 +19,7 @@
       font-family: 'LimbusFont', Arial, sans-serif;
       color: #e0e0e0;
       overflow-x: hidden;
+      background-color: #121212;
     }
     
     #video-background {
@@ -34,7 +35,7 @@
     
     .content-overlay {
       position: relative;
-      background-color: rgba(18, 18, 18, 0.85);
+      background-color: rgba(18, 18, 18, 0.2);
       min-height: 100vh;
     }
     
@@ -90,11 +91,12 @@
     
     h1 {
       color: #ff5555;
-      font-size: 2.5em;
+      font-size: 2.8em;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
+      text-shadow: 0 0 15px rgba(255, 85, 85, 0.7);
       position: relative;
       display: inline-block;
+      font-weight: bold;
     }
     
     h1::after {
@@ -116,80 +118,120 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
-    .center-button {
+    .center-content {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 70vh;
       text-align: center;
+      min-height: 70vh;
+    }
+    
+    .logo {
+      width: 220px;
+      margin-bottom: 40px;
+      filter: drop-shadow(0 0 10px rgba(255, 85, 85, 0.5));
+    }
+    
+    .main-title {
+      font-size: 3.2em;
+      font-weight: bold;
+      margin-bottom: 25px;
+      text-shadow: 0 0 20px rgba(255, 85, 85, 0.8);
+      letter-spacing: 1px;
+    }
+    
+    .subtitle {
+      font-size: 1.4em;
+      max-width: 750px;
+      margin-bottom: 50px;
+      line-height: 1.7;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
     }
     
     .download-btn {
       background-color: #ff5555;
       color: white;
-      font-size: 1.5em;
-      padding: 18px 40px;
+      font-size: 1.6em;
+      padding: 20px 50px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       margin-bottom: 30px;
       font-family: 'LimbusFont', Arial, sans-serif;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(255, 85, 85, 0.4);
+      box-shadow: 0 5px 20px rgba(255, 85, 85, 0.5);
       position: relative;
       overflow: hidden;
+      letter-spacing: 1px;
     }
     
     .download-btn:hover {
       background-color: #ff3333;
-      transform: translateY(-3px);
-      box-shadow: 0 7px 20px rgba(255, 85, 85, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 85, 85, 0.7);
     }
     
     .download-btn:active {
-      transform: translateY(1px);
+      transform: translateY(2px);
     }
     
-    .download-btn::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: rotate(45deg);
-      transition: all 0.5s ease;
+    .version-info {
+      color: #aaa;
+      font-size: 1em;
+      margin-top: 25px;
+      letter-spacing: 0.5px;
     }
     
-    .download-btn:hover::after {
-      left: 100%;
+    /* Ekip Üyeleri Stili */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
     }
     
-    .link {
-      color: #8ab4f8;
-      text-decoration: none;
-      font-size: 1.1em;
+    .team-member {
+      background-color: rgba(30, 30, 30, 0.7);
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
       transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
+      border: 1px solid #333;
+      backdrop-filter: blur(5px);
     }
     
-    .link:hover {
+    .team-member:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(255, 85, 85, 0.3);
+      border-color: #ff5555;
+    }
+    
+    .member-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid #ff5555;
+      margin: 0 auto 20px;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(255, 85, 85, 0.4);
+    }
+    
+    .member-name {
       color: #ff5555;
-      text-decoration: none;
-      transform: translateX(5px);
+      margin: 15px 0 5px;
+      font-size: 1.3em;
     }
     
-    .link::after {
-      content: '→';
-      margin-left: 5px;
-      transition: all 0.3s ease;
+    .member-role {
+      margin: 5px 0;
+      font-size: 1.1em;
     }
     
-    .link:hover::after {
-      margin-left: 10px;
+    .member-detail {
+      color: #aaa;
+      font-size: 0.95em;
+      margin-top: 10px;
     }
     
     /* Commit Styles */
@@ -197,9 +239,9 @@
       display: flex;
       align-items: center;
       border: 1px solid #333;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
       background-color: rgba(30, 30, 30, 0.7);
       transition: all 0.3s ease;
       backdrop-filter: blur(5px);
@@ -207,15 +249,15 @@
     
     .commit:hover {
       border-color: #ff5555;
-      transform: translateX(5px);
-      box-shadow: 0 5px 15px rgba(255, 85, 85, 0.2);
+      transform: translateX(8px);
+      box-shadow: 0 8px 20px rgba(255, 85, 85, 0.2);
     }
     
     .avatar {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      margin-right: 20px;
+      margin-right: 25px;
       border: 2px solid #ff5555;
     }
     
@@ -236,17 +278,19 @@
     
     .commit strong {
       color: #ff5555;
+      font-size: 1.1em;
     }
     
     .commit em {
       color: #aaa;
-      font-size: 0.9em;
+      font-size: 0.95em;
     }
     
     .commit-message {
-      margin-top: 5px;
+      margin-top: 8px;
       display: block;
-      line-height: 1.4;
+      line-height: 1.5;
+      font-size: 1.05em;
     }
     
     /* Responsive Design */
@@ -259,41 +303,46 @@
       nav a {
         margin: 5px 0;
         padding: 8px 15px;
+        font-size: 1em;
+      }
+      
+      .main-title {
+        font-size: 2.4em;
+      }
+      
+      .subtitle {
+        font-size: 1.1em;
+        margin-bottom: 30px;
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+      }
+      
+      .download-btn {
+        font-size: 1.3em;
+        padding: 15px 35px;
       }
       
       .commit {
         flex-direction: column;
         text-align: center;
+        padding: 15px;
       }
       
       .avatar {
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
       }
-    }
-    
-    /* Loading Animation */
-    #commits[data-loading="true"]::after {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255, 85, 85, 0.3);
-      border-radius: 50%;
-      border-top-color: #ff5555;
-      animation: spin 1s ease-in-out infinite;
-      margin-left: 10px;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
   <video id="video-background" autoplay muted loop>
-    <source src="assets/videos/limbus_background.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+    <source src="assets/videos/limbus_title_1.mp4" type="video/mp4">
+    <source src="assets/videos/limbus_title_1.webm" type="video/webm">
+    Video Çalıştırılamadı.
   </video>
   
   <div class="content-overlay">
@@ -307,89 +356,190 @@
 
     <main>
       <div id="anasayfa" class="tab">
-        <div class="center-button">
-          <h2 style="color: #ff5555; margin-bottom: 30px; font-size: 2em;">Limbus Company Türkçe Çeviri Projesi</h2>
-          <p style="max-width: 700px; margin-bottom: 40px; line-height: 1.6; font-size: 1.1em;">
-            Limbus Company oyununun resmi olmayan Türkçe çeviri projesine hoş geldiniz. 
-            En son sürümü indirmek için Discord sunucumuza katılın.
+        <div class="center-content">
+          <img src="assets/images/limbus_logo.png" alt="Limbus Company Logo" class="logo">
+          <h1 class="main-title">LİMBUS COMPANY TÜRKÇE ÇEVİRİ</h1>
+          <p class="subtitle">
+            Limbus Company oyununun resmi olmayan Türkçe çeviri projesi.  
+            En son sürümü indirmek için aşağıdaki butonu kullanabilirsiniz.
+            çeviri ekibimiz tarafından özenle hazırlanmıştır.
           </p>
-          <button class="download-btn" onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">
+          <button class="download-btn" onclick="window.location.href='discord.gg/ayprojesiturkiye'">
             SON SÜRÜMÜ İNDİR
           </button>
-          <a class="link" href="#surumler" onclick="showTab('surumler')">Tüm sürümlere göz atın</a>
+          <p class="version-info">Sürüm: v1.2.0 | Güncelleme: 25 Mayıs 2025 | Çevirmen Sayısı: XX</p>
         </div>
       </div>
 
       <div id="commitler" class="tab" style="display:none">
         <h1>Son Proje Güncellemeleri</h1>
-        <p style="margin-bottom: 20px;">Projedeki son değişiklikler ve güncellemeler:</p>
+        <p style="margin-bottom: 25px; font-size: 1.1em;">Projedeki son değişiklikler ve güncellemeler:</p>
         <div id="commits" data-loading="true">Yükleniyor...</div>
       </div>
 
       <div id="haberler" class="tab" style="display:none">
         <h1>Duyurular ve Haberler</h1>
-        <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ff5555;">
-          <h3 style="color: #ff5555; margin-top: 0;">Çeviri Projesi Başladı!</h3>
-          <p style="margin-bottom: 0;">Limbus Company için Türkçe çeviri projemiz resmen başlamıştır. Gelişmeleri buradan takip edebilirsiniz.</p>
-          <small style="color: #aaa; display: block; margin-top: 10px;">15 Mayıs 2023</small>
+        <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ff5555; backdrop-filter: blur(5px);">
+          <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">Çeviri Projesi Başladı!</h3>
+          <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">Limbus Company için Türkçe çeviri projemiz resmen başlamıştır. Çeviri ekibimizle tüm içerikler titizlikle çevrilmektedir. Gelişmeleri buradan takip edebilirsiniz.</p>
+          <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">25 Mayıs 2025</small>
+        </div>
+        <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ff5555; backdrop-filter: blur(5px);">
+          <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">CANTO 8!</h3>
+          <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">CANTO 8!CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CEVAP VER JIA BAOYU, HONGYUANIN NEYE IHTIYACI VAR!  CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8!</p>
+          <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">26 Mayıs 2025</small>
         </div>
       </div>
 
       <div id="surumler" class="tab" style="display:none">
         <h1>Sürüm Geçmişi</h1>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 20px; border-radius: 8px; border-top: 4px solid #ff5555;">
-            <h3 style="color: #ff5555; margin-top: 0;">v1.2.0</h3>
-            <ul style="padding-left: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-top: 30px;">
+          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.2.0</h3>
+            <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
               <li>Yeni bölümler eklendi</li>
               <li>Hata düzeltmeleri yapıldı</li>
-              <li>Arayüz iyileştirmeleri</li>
+              <li>Falan Filan</li>
+              <li>Falan Filan</li>
             </ul>
-            <button style="background-color: #ff5555; color: white; border: none; padding: 8px 15px; border-radius: 4px; margin-top: 10px; cursor: pointer;" onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
+            <button style="background-color: #ff5555; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;" 
+                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.6)';"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+                    onclick="window.location.href='discord.gg/ayprojesiturkiye'">İndir</button>
           </div>
           
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 20px; border-radius: 8px; border-top: 4px solid #ff5555;">
-            <h3 style="color: #ff5555; margin-top: 0;">v1.1.0</h3>
-            <ul style="padding-left: 20px;">
-              <li>Çeviri kalitesi iyileştirildi</li>
-              <li>Küçük hatalar düzeltildi</li>
+          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.1.0</h3>
+            <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
+              <li>Falan Filan</li>
+              <li>Falan Filan</li>
+              <li>Falan Filan</li>
             </ul>
-            <button style="background-color: #444; color: white; border: none; padding: 8px 15px; border-radius: 4px; margin-top: 10px; cursor: pointer;" onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
+            <button style="background-color: #444; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;"
+                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.3)';"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+                    onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
           </div>
           
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 20px; border-radius: 8px; border-top: 4px solid #ff5555;">
-            <h3 style="color: #ff5555; margin-top: 0;">v1.0.0</h3>
-            <ul style="padding-left: 20px;">
-              <li>İlk sürüm yayınlandı</li>
-              <li>Temel çeviriler tamamlandı</li>
+          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.0.0</h3>
+            <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
+              <li>Falan Filan</li>
+              <li>Falan Filan</li>
+              <li>Falan Filan</li>
             </ul>
-            <button style="background-color: #444; color: white; border: none; padding: 8px 15px; border-radius: 4px; margin-top: 10px; cursor: pointer;" onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
+            <button style="background-color: #444; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;"
+                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.3)';"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+                    onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
           </div>
         </div>
       </div>
 
       <div id="ekip" class="tab" style="display:none">
         <h1>Çeviri Ekibi</h1>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 20px; border-radius: 8px; text-align: center;">
-            <img src="https://via.placeholder.com/100" alt="Ekip Üyesi" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ff5555; margin-bottom: 15px;">
-            <h3 style="color: #ff5555; margin: 10px 0;">Pepsiman9000</h3>
-            <p style="margin: 5px 0;">Proje Lideri</p>
-            <p style="color: #aaa; font-size: 0.9em;">Çevirmen & Geliştirici</p>
+        <p style="margin-bottom: 20px; font-size: 1.1em;">Çeviri Ekibimiz:</p>
+        <div class="team-grid">
+          <!-- Proje Liderleri -->
+          <div class="team-member">
+            <img src="https://avatars.githubusercontent.com/u/120224189?s=60&v=4" alt="Sunucu Sahipi" class="member-avatar">
+            <h3 class="member-name">Archelius</h3>
+            <p class="member-role">Sunucu Sahipi</p>
+            <p class="member-detail">Çevirmen & Başka şeyler</p>
           </div>
           
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 20px; border-radius: 8px; text-align: center;">
-            <img src="https://via.placeholder.com/100" alt="Ekip Üyesi" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ff5555; margin-bottom: 15px;">
-            <h3 style="color: #ff5555; margin: 10px 0;">Ekip Üyesi</h3>
-            <p style="margin: 5px 0;">Çevirmen</p>
-            <p style="color: #aaa; font-size: 0.9em;">Metin Çevirileri</p>
+          <div class="team-member">
+            <img src="https://avatars.githubusercontent.com/u/206207932?s=60&v=4" alt="Editör" class="member-avatar">
+            <h3 class="member-name">Veulem</h3>
+            <p class="member-role">Çevirmen & Editör</p>
+            <p class="member-detail">Kalite Kontrol</p>
           </div>
           
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 20px; border-radius: 8px; text-align: center;">
-            <img src="https://via.placeholder.com/100" alt="Ekip Üyesi" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ff5555; margin-bottom: 15px;">
-            <h3 style="color: #ff5555; margin: 10px 0;">Ekip Üyesi</h3>
-            <p style="margin: 5px 0;">Editör</p>
-            <p style="color: #aaa; font-size: 0.9em;">Kalite Kontrol</p>
+          <!-- Çevirmenler -->
+          <div class="team-member">
+            <img src="https://avatars.githubusercontent.com/u/98769349?s=60&v=4" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Don Kilot</h3>
+            <p class="member-role">Çevirmen & Geliştirici</p>
+            <p class="member-detail">Zaman Deşiyom</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://avatars.githubusercontent.com/u/206466344?s=60&v=4" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Durante1300</h3>
+            <p class="member-role">Çevirmen</p>
+            <p class="member-detail">ÖSYM SAATİ</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 3</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 4</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 5</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 6</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 7</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 8</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 9</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 10</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 11</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 12</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 13</h3>
+            <p class="member-role">Çevirmen</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://via.placeholder.com/150" alt="Çevirmen" class="member-avatar">
+            <h3 class="member-name">Çevirmen 14</h3>
+            <p class="member-role">Çevirmen</p>
           </div>
         </div>
       </div>
@@ -397,32 +547,47 @@
   </div>
 
   <script>
-    // Show initial tab
-    window.onload = function() {
-      showTab('anasayfa');
-      // Highlight the current tab in navigation
-      const navLinks = document.querySelectorAll('nav a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          navLinks.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
-        });
+    // Video kontrolü
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('video-background');
+      
+      // Video yüklenemediyse alternatif arka plan
+      video.addEventListener('error', function() {
+        console.log('Video yüklenemedi, alternatif arka plan ayarlanıyor');
+        document.body.style.backgroundImage = 'url("assets/images/limbus_background.jpg")';
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundPosition = 'center';
+        video.style.display = 'none';
       });
-    };
+      
+      // M tuşu ile ses aç/kapa
+      document.addEventListener('keydown', function(e) {
+        if (e.code === 'KeyM') {
+          video.muted = !video.muted;
+          alert('Video sesi ' + (video.muted ? 'kapalı' : 'açık'));
+        }
+      });
+    });
 
+    // Tab geçiş fonksiyonu
     function showTab(tabId) {
       document.querySelectorAll('.tab').forEach(tab => {
         tab.style.display = 'none';
       });
       document.getElementById(tabId).style.display = 'block';
       
-      // Smooth scroll to top when switching tabs
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+      // Aktif menü öğesini vurgula
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${tabId}`) {
+          link.classList.add('active');
+        }
       });
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Commit yükleme fonksiyonu
     let lastSha = null;
     async function loadCommits(initialLoad = false) {
       const commitsDiv = document.getElementById('commits');
@@ -481,16 +646,12 @@
       }
     }
 
-    loadCommits(true);
-    setInterval(() => loadCommits(false), 30000); // Check every 30 seconds
-    
-    // Video background mute toggle
-    document.addEventListener('keydown', function(e) {
-      if (e.code === 'KeyM') {
-        const video = document.getElementById('video-background');
-        video.muted = !video.muted;
-      }
-    });
+    // Sayfa yüklendiğinde
+    window.onload = function() {
+      showTab('anasayfa');
+      loadCommits(true);
+      setInterval(() => loadCommits(false), 7000); // Her 7 saniyede bir kontrol et
+    };
   </script>
 </body>
 </html>
