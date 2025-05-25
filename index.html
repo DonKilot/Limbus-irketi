@@ -185,7 +185,7 @@
     }
     
     .main-title {
-      font-size: 3.2em;
+      font-size: 2.72em; /* %15 küçültülmüş */
       font-weight: bold;
       margin-bottom: 25px;
       text-shadow: 0 0 20px rgba(255, 85, 85, 0.8);
@@ -193,7 +193,7 @@
     }
     
     .subtitle {
-      font-size: 1.4em;
+      font-size: 1.19em; /* %15 küçültülmüş */
       max-width: 750px;
       margin-bottom: 50px;
       line-height: 1.7;
@@ -203,8 +203,8 @@
     .download-btn {
       background-color: #ff5555;
       color: white;
-      font-size: 1.6em;
-      padding: 20px 50px;
+      font-size: 1.52em; /* %5 küçültülmüş */
+      padding: 19px 47.5px; /* %5 küçültülmüş */
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -237,7 +237,7 @@
     /* Ekip Üyeleri Stili */
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(4, 1fr); /* 4 sütun */
       gap: 25px;
       margin-top: 40px;
     }
@@ -345,11 +345,18 @@
     }
 
     /* News Items */
+    .news-container {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
     .news-item {
       background-color: rgba(30, 30, 30, 0.7);
       padding: 25px;
       border-radius: 10px;
-      margin-bottom: 25px;
       border-left: 5px solid #ff5555;
       backdrop-filter: blur(5px);
       transition: all 0.3s ease;
@@ -359,8 +366,57 @@
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(255, 85, 85, 0.2);
     }
+
+    /* Search Bar */
+    .search-container {
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background-color: rgba(30, 30, 30, 0.8);
+      color: #e0e0e0;
+      font-size: 1em;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .search-bar:focus {
+      outline: none;
+      box-shadow: 0 0 15px rgba(255, 85, 85, 0.4);
+    }
+
+    .search-bar::placeholder {
+      color: #aaa;
+    }
+
+    .not-found {
+      color: #ff5555;
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 30px;
+    }
     
     /* Responsive Design */
+    @media (max-width: 1200px) {
+      .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
@@ -383,7 +439,7 @@
       }
       
       .team-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 15px;
       }
       
@@ -405,6 +461,12 @@
 
       .center-content {
         padding: 30px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .team-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -451,22 +513,27 @@
         <div class="center-content">
           <h1>Son Proje Güncellemeleri</h1>
           <p style="margin-bottom: 25px; font-size: 1.1em;">Günâhla yüzleş, E.G.O'yu kurtar.</p>
-          <div id="commits" data-loading="true">Bunu Görüyor musun? oha, merak etme Yükleniyor...</div>
+          <div id="commits">Yükleniyor...</div>
         </div>
       </div>
 
       <div id="haberler" class="tab" style="display:none">
         <div class="center-content">
           <h1>Duyurular ve Haberler</h1>
-          <div class="news-item">
-            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">Çeviri Projesi Başladı!</h3>
-            <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">Limbus Company için Türkçe çeviri projemiz resmen başlamıştır. Çeviri ekibimizle tüm içerikler titizlikle çevrilmektedir. Gelişmeleri buradan takip edebilirsiniz.</p>
-            <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">25 Mayıs 2025</small>
+          <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Duyurularda ara..." oninput="searchNews(this.value)">
           </div>
-          <div class="news-item">
-            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">CANTO 8!</h3>
-            <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">CANTO 8!CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CEVAP VER JIA BAOYU, HONGYUANIN NEYE IHTIYACI VAR!  CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8!</p>
-            <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">26 Mayıs 2025</small>
+          <div class="news-container" id="news-container">
+            <div class="news-item" data-title="Çeviri Projesi Başladı!" data-content="Limbus Company için Türkçe çeviri projemiz resmen başlamıştır. Çeviri ekibimizle tüm içerikler titizlikle çevrilmektedir. Gelişmeleri buradan takip edebilirsiniz.">
+              <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">Çeviri Projesi Başladı!</h3>
+              <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">Limbus Company için Türkçe çeviri projemiz resmen başlamıştır. Çeviri ekibimizle tüm içerikler titizlikle çevrilmektedir. Gelişmeleri buradan takip edebilirsiniz.</p>
+              <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">25 Mayıs 2025</small>
+            </div>
+            <div class="news-item" data-title="CANTO 8!" data-content="CANTO 8!CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CEVAP VER JIA BAOYU, HONGYUANIN NEYE IHTIYACI VAR!  CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8!">
+              <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">CANTO 8!</h3>
+              <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">CANTO 8!CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CEVAP VER JIA BAOYU, HONGYUANIN NEYE IHTIYACI VAR!  CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8!</p>
+              <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">26 Mayıs 2025</small>
+            </div>
           </div>
         </div>
       </div>
@@ -716,9 +783,6 @@
       const commitsDiv = document.getElementById('commits');
       if (!commitsDiv) return;
 
-      commitsDiv.setAttribute('data-loading', 'true');
-      commitsDiv.innerHTML = '<p>Yükleniyor...</p>';
-
       try {
         const response = await fetch('https://api.github.com/repos/Pepsiman9000/limbuscompanyturkishtranslation/commits');
         if (!response.ok) throw new Error('API yanıt vermedi');
@@ -768,19 +832,17 @@
         });
       } catch (error) {
         console.error('Commit yüklenirken hata oluştu:', error);
-        commitsDiv.innerHTML = `
-          <p style="color: #ff5555">Commit bilgileri geçici olarak ulaşılamıyor.</p>
-          <button onclick="loadCommits(true)" style="background-color: #ff5555; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Tekrar Dene</button>
-        `;
+        commitsDiv.innerHTML = '<p>Commit bilgileri yüklenirken bir hata oluştu.</p>';
       } finally {
         commitsDiv.setAttribute('data-loading', 'false');
       }
     }
 
+    // Sayfa yüklendiğinde
     window.onload = function() {
       showTab('anasayfa');
       loadCommits(true);
-      setInterval(() => loadCommits(false), 7000);
+      setInterval(() => loadCommits(false), 7000); // Her 7 saniyede bir kontrol et
     };
   </script>
 </body>
