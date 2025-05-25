@@ -286,9 +286,16 @@
     }
     
     /* Commit Styles */
+    .commits-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
     .commit {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       border: 1px solid #333;
       padding: 20px;
       margin: 20px 0;
@@ -310,6 +317,7 @@
       border-radius: 50%;
       margin-right: 25px;
       border: 2px solid #ff5555;
+      flex-shrink: 0;
     }
     
     .commit-details {
@@ -545,7 +553,10 @@
         <div class="center-content">
           <h1>Son Proje Güncellemeleri</h1>
           <p style="margin-bottom: 25px; font-size: 1.1em;">Günâhla yüzleş, E.G.O'yu kurtar.</p>
-          <div id="commits-container">
+          <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Commitlerde ara..." oninput="searchCommits(this.value)">
+          </div>
+          <div class="commits-container">
             <div id="commits">Yükleniyor...</div>
             <button id="load-more" class="load-more" style="display: none;">Daha Fazla Yükle</button>
           </div>
@@ -673,7 +684,7 @@
               <img src="https://avatars.githubusercontent.com/u/209387939?v=4" alt="Çevirmen" class="member-avatar">
               <h3 class="member-name">mox</h3>
               <p class="member-role">Çevirmen</p>
-              <p class="member-detail">bir numaralı Gregor havalandırma sistemi</p>
+              <p class="member-detail">1# numaralı Gregor havalandırma sistemi/p>
             </div>
             
             <div class="team-member">
@@ -821,6 +832,7 @@
     let commitsPage = 1;
     let isLoadingCommits = false;
     let allCommitsLoaded = false;
+    let allCommits = [];
 
     async function loadCommits(initialLoad = false) {
       if (isLoadingCommits || allCommitsLoaded) return;
@@ -836,9 +848,10 @@
           commitsDiv.innerHTML = '<div style="text-align: center;"><span class="loading-spinner"></span>Yükleniyor...</div>';
           commitsPage = 1;
           allCommitsLoaded = false;
+          allCommits = [];
         }
 
-        const perPage = initialLoad ? 10 : 5;
+        const perPage = initialLoad ? 15 : 10;
         const response = await fetch(`https://api.github.com/repos/Pepsiman9000/limbuscompanyturkishtranslation/commits?page=${commitsPage}&per_page=${perPage}`);
         
         if (!response.ok) throw new Error('API yanıt vermedi');
@@ -859,36 +872,14 @@
           return;
         }
 
+        // Tüm commitleri sakla
+        allCommits = [...allCommits, ...commits];
+
         if (initialLoad) {
           commitsDiv.innerHTML = '';
         }
 
-        commits.forEach(commit => {
-          const author = commit.author || {};
-          const committer = commit.committer || {};
-          const avatarUrl = author.avatar_url || 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';
-          const authorName = commit.commit.author.name;
-          const authorLink = author.html_url || '#';
-          const date = new Date(commit.commit.author.date).toLocaleString('tr-TR', {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          });
-
-          const div = document.createElement('div');
-          div.className = 'commit';
-          div.innerHTML = `
-            <img src="${avatarUrl}" alt="Avatar" class="avatar" onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
-            <div class="commit-details">
-              <strong><a href="${authorLink}" target="_blank">${authorName}</a></strong> - 
-              <em>${date}</em>
-              <a href="${commit.html_url}" target="_blank" class="commit-message">${commit.commit.message}</a>
-            </div>
-          `;
-          commitsDiv.appendChild(div);
-        });
+        renderCommits(allCommits);
 
         commitsPage++;
         loadMoreBtn.style.display = commits.length >= perPage ? 'block' : 'none';
@@ -897,6 +888,78 @@
         commitsDiv.innerHTML = '<p>Commit bilgileri yüklenirken bir hata oluştu.</p>';
       } finally {
         isLoadingCommits = false;
+      }
+    }
+
+    // Commitleri render etme fonksiyonu
+    function renderCommits(commitsToRender) {
+      const commitsDiv = document.getElementById('commits');
+      commitsDiv.innerHTML = '';
+
+      commitsToRender.forEach(commit => {
+        const author = commit.author || {};
+        const committer = commit.committer || {};
+        const avatarUrl = author.avatar_url || 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';
+        const authorName = commit.commit.author.name;
+        const authorLink = author.html_url || '#';
+        const date = new Date(commit.commit.author.date).toLocaleString('tr-TR', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        const div = document.createElement('div');
+        div.className = 'commit';
+        div.setAttribute('data-message', commit.commit.message.toLowerCase());
+        div.setAttribute('data-author', authorName.toLowerCase());
+        div.innerHTML = `
+          <img src="${avatarUrl}" alt="Avatar" class="avatar" onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
+          <div class="commit-details">
+            <strong><a href="${authorLink}" target="_blank">${authorName}</a></strong> - 
+            <em>${date}</em>
+            <a href="${commit.html_url}" target="_blank" class="commit-message">${commit.commit.message}</a>
+          </div>
+        `;
+        commitsDiv.appendChild(div);
+      });
+    }
+
+    // Commit arama fonksiyonu
+    function searchCommits(query) {
+      const commitsDiv = document.getElementById('commits');
+      const commitItems = commitsDiv.querySelectorAll('.commit');
+      let foundAny = false;
+      
+      query = query.toLowerCase().trim();
+      
+      commitItems.forEach(item => {
+        const message = item.getAttribute('data-message');
+        const author = item.getAttribute('data-author');
+        
+        if (query === '' || message.includes(query) || author.includes(query)) {
+          item.style.display = 'flex';
+          foundAny = true;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      
+      // Eğer hiç sonuç bulunamadıysa mesaj göster
+      const notFoundMessage = commitsDiv.querySelector('.not-found');
+      if (!foundAny && query !== '') {
+        if (!notFoundMessage) {
+          const message = document.createElement('p');
+          message.className = 'not-found';
+          message.textContent = `"${query}" ile eşleşen commit bulunamadı.`;
+          commitsDiv.appendChild(message);
+        } else {
+          notFoundMessage.textContent = `"${query}" ile eşleşen commit bulunamadı.`;
+          notFoundMessage.style.display = 'block';
+        }
+      } else if (notFoundMessage) {
+        notFoundMessage.style.display = 'none';
       }
     }
 
