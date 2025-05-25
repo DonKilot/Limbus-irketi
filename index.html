@@ -1,13 +1,11 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Limbus Şirketi</title>
-  <!-- ADD FAVICON HERE -->
   <link rel="icon" href="assets/icon/LimbusIcon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="web_logo.png">
-  <!-- End of favicon -->
   <style>
     @font-face {
       font-family: 'LimbusFont';
@@ -24,6 +22,9 @@
       color: #e0e0e0;
       overflow-x: hidden;
       background-color: #121212;
+      background-image: url('assets/images/limbus_background.jpg');
+      background-size: cover;
+      background-position: center;
     }
 
     #video-background {
@@ -71,6 +72,135 @@
       80% { transform: translate(10px, -5px); }
       100% { transform: translate(0, 0); }
     }
+
+    /* YENİ EKLENEN STİLLER */
+    .center-content {
+      text-align: center;
+      padding: 50px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      max-width: 300px;
+      margin-bottom: 30px;
+    }
+
+    .main-title {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #ff5555;
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .download-btn {
+      background-color: #ff5555;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 85, 85, 0.3);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .team-member {
+      background-color: rgba(30, 30, 30, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      border-top: 3px solid #ff5555;
+    }
+
+    .member-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .member-name {
+      color: #ff5555;
+      margin: 10px 0;
+    }
+
+    .member-role {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .member-detail {
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    /* Nav düzenlemesi */
+    nav {
+      background-color: rgba(18, 18, 18, 0.8);
+      padding: 15px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+    }
+
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1em;
+      padding: 5px 10px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover, nav a.active {
+      color: #ff5555;
+      border-bottom: 2px solid #ff5555;
+    }
+
+    .tab {
+      padding: 20px;
+    }
+
+    /* Responsive tasarım */
+    @media (max-width: 768px) {
+      .center-content {
+        padding: 30px 15px;
+      }
+      
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .main-title {
+        font-size: 2em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -112,186 +242,194 @@
       </div>
 
       <div id="commitler" class="tab" style="display:none">
-        <h1>Son Proje Güncellemeleri</h1>
-        <p style="margin-bottom: 25px; font-size: 1.1em;">Günâhla yüzleş, E.G.O'yu kurtar.</p>
-        <div id="commits" data-loading="true">Bunu Görüyor musun? oha, merak etme Yükleniyor...</div>
+        <div class="center-content">
+          <h1>Son Proje Güncellemeleri</h1>
+          <p style="margin-bottom: 25px; font-size: 1.1em;">Günâhla yüzleş, E.G.O'yu kurtar.</p>
+          <div id="commits" data-loading="true">Bunu Görüyor musun? oha, merak etme Yükleniyor...</div>
+        </div>
       </div>
 
       <div id="haberler" class="tab" style="display:none">
-        <h1>Duyurular ve Haberler</h1>
-        <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ff5555; backdrop-filter: blur(5px);">
-          <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">Çeviri Projesi Başladı!</h3>
-          <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">Limbus Company için Türkçe çeviri projemiz resmen başlamıştır. Çeviri ekibimizle tüm içerikler titizlikle çevrilmektedir. Gelişmeleri buradan takip edebilirsiniz.</p>
-          <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">25 Mayıs 2025</small>
-        </div>
-        <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ff5555; backdrop-filter: blur(5px);">
-          <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">CANTO 8!</h3>
-          <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">CANTO 8!CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CEVAP VER JIA BAOYU, HONGYUANIN NEYE IHTIYACI VAR!  CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8!</p>
-          <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">26 Mayıs 2025</small>
+        <div class="center-content">
+          <h1>Duyurular ve Haberler</h1>
+          <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ff5555; backdrop-filter: blur(5px);">
+            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">Çeviri Projesi Başladı!</h3>
+            <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">Limbus Company için Türkçe çeviri projemiz resmen başlamıştır. Çeviri ekibimizle tüm içerikler titizlikle çevrilmektedir. Gelişmeleri buradan takip edebilirsiniz.</p>
+            <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">25 Mayıs 2025</small>
+          </div>
+          <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ff5555; backdrop-filter: blur(5px);">
+            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">CANTO 8!</h3>
+            <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">CANTO 8!CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CEVAP VER JIA BAOYU, HONGYUANIN NEYE IHTIYACI VAR!  CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8!</p>
+            <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">26 Mayıs 2025</small>
+          </div>
         </div>
       </div>
 
       <div id="surumler" class="tab" style="display:none">
-        <h1>Sürüm Geçmişi</h1>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-top: 30px;">
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
-            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.2.0</h3>
-            <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
-              <li>Yeni bölümler eklendi</li>
-              <li>Hata düzeltmeleri yapıldı</li>
-              <li>Falan Filan</li>
-              <li>Falan Filan</li>
-            </ul>
-            <button style="background-color: #ff5555; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;" 
-                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.6)';"
-                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
-                    onclick="window.location.href='discord.gg/ayprojesiturkiye'">İndir</button>
-          </div>
-          
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
-            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.1.0</h3>
-            <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
-              <li>Falan Filan</li>
-              <li>Falan Filan</li>
-              <li>Falan Filan</li>
-            </ul>
-            <button style="background-color: #444; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;"
-                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.3)';"
-                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
-                    onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
-          </div>
-          
-          <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
-            <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.0.0</h3>
-            <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
-              <li>Falan Filan</li>
-              <li>Falan Filan</li>
-              <li>Falan Filan</li>
-            </ul>
-            <button style="background-color: #444; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;"
-                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.3)';"
-                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
-                    onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
+        <div class="center-content">
+          <h1>Sürüm Geçmişi</h1>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-top: 30px;">
+            <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+              <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.2.0</h3>
+              <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
+                <li>Yeni bölümler eklendi</li>
+                <li>Hata düzeltmeleri yapıldı</li>
+                <li>Falan Filan</li>
+                <li>Falan Filan</li>
+              </ul>
+              <button style="background-color: #ff5555; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;" 
+                      onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.6)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+                      onclick="window.location.href='discord.gg/ayprojesiturkiye'">İndir</button>
+            </div>
+            
+            <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+              <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.1.0</h3>
+              <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
+                <li>Falan Filan</li>
+                <li>Falan Filan</li>
+                <li>Falan Filan</li>
+              </ul>
+              <button style="background-color: #444; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;"
+                      onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.3)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+                      onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
+            </div>
+            
+            <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+              <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.0.0</h3>
+              <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
+                <li>Falan Filan</li>
+                <li>Falan Filan</li>
+                <li>Falan Filan</li>
+              </ul>
+              <button style="background-color: #444; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-size: 1.1em; transition: all 0.3s ease;"
+                      onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(255, 85, 85, 0.3)';"
+                      onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+                      onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div id="ekip" class="tab" style="display:none">
-        <h1>Çeviri Ekibi</h1>
-        <p style="margin-bottom: 20px; font-size: 1.1em;">Çeviri Ekibimiz:</p>
-        <div class="team-grid">
-          <!-- Proje Liderleri -->
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/120224189?s=60&v=4" alt="Sunucu Sahipi" class="member-avatar">
-            <h3 class="member-name">Archelius</h3>
-            <p class="member-role">Çevirmen Kırbaçlayıcı</p>
-            <p class="member-detail">Çevirmen & Başka şeyler</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/206207932?v=4" alt="Editör" class="member-avatar">
-            <h3 class="member-name">Veulem</h3>
-            <p class="member-role">Çevirmen & Editör</p>
-            <p class="member-detail">Kalite Kontrol</p>
-          </div>
-          
-          <!-- Çevirmenler -->
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/98769349?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">Don Kilot</h3>
-            <p class="member-role">Çevirmen & Geliştirici</p>
-            <p class="member-detail">Zaman Deşiyom</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/206466344?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">Durante1300</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">ÖSYM SAATİ</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/86320619?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">SHCyank</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">"Canto 4'ü sololayan eleman"</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/206413876?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">soundffects</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">Heathcliff Fanatiği</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/209387939?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">mox</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">PLACEHOLDER</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/208271529?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">Githrawen</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">PLACEHOLDER</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/206208429?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">Vexentnex</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">PLACEHOLDER</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/206420584?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">Atarik41</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">Canto 8'i düşledi</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/208987528?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">BoiBebe</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">“Korkuyla Yüzleş, Bir şeyi İnşaat Et falan"</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/206412592?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">Fuuemir</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">İmam Bayıldı</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/206465683?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">KederAdam</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">"Sizinle işe başladığım günü s..."</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/148778781?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">Kruhpler</h3>
-            <p class="member-role">Emekli Çevirmen</p>
-            <p class="member-detail">Emekli oldu galiba</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/212021308?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">Syesta</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">Keçi Silken</p>
-          </div>
-          
-          <div class="team-member">
-            <img src="https://avatars.githubusercontent.com/u/210610706?v=4" alt="Çevirmen" class="member-avatar">
-            <h3 class="member-name">SleepyAkelius</h3>
-            <p class="member-role">Çevirmen</p>
-            <p class="member-detail">PLACEHOLDER</p>
+        <div class="center-content">
+          <h1>Çeviri Ekibi</h1>
+          <p style="margin-bottom: 20px; font-size: 1.1em;">Çeviri Ekibimiz:</p>
+          <div class="team-grid">
+            <!-- Proje Liderleri -->
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/120224189?s=60&v=4" alt="Sunucu Sahipi" class="member-avatar">
+              <h3 class="member-name">Archelius</h3>
+              <p class="member-role">Çevirmen Kırbaçlayıcı</p>
+              <p class="member-detail">Çevirmen & Başka şeyler</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/206207932?v=4" alt="Editör" class="member-avatar">
+              <h3 class="member-name">Veulem</h3>
+              <p class="member-role">Çevirmen & Editör</p>
+              <p class="member-detail">Kalite Kontrol</p>
+            </div>
+            
+            <!-- Çevirmenler -->
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/98769349?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">Don Kilot</h3>
+              <p class="member-role">Çevirmen & Geliştirici</p>
+              <p class="member-detail">Zaman Deşiyom</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/206466344?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">Durante1300</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">ÖSYM SAATİ</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/86320619?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">SHCyank</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">"Canto 4'ü sololayan eleman"</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/206413876?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">soundffects</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">Heathcliff Fanatiği</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/209387939?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">mox</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">PLACEHOLDER</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/208271529?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">Githrawen</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">PLACEHOLDER</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/206208429?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">Vexentnex</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">PLACEHOLDER</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/206420584?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">Atarik41</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">Canto 8'i düşledi</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/208987528?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">BoiBebe</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">"Korkuyla Yüzleş, Bir şeyi İnşaat Et falan"</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/206412592?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">Fuuemir</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">İmam Bayıldı</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/206465683?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">KederAdam</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">"Sizinle işe başladığım günü s..."</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/148778781?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">Kruhpler</h3>
+              <p class="member-role">Emekli Çevirmen</p>
+              <p class="member-detail">Emekli oldu galiba</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/212021308?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">Syesta</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">Keçi Silken</p>
+            </div>
+            
+            <div class="team-member">
+              <img src="https://avatars.githubusercontent.com/u/210610706?v=4" alt="Çevirmen" class="member-avatar">
+              <h3 class="member-name">SleepyAkelius</h3>
+              <p class="member-role">Çevirmen</p>
+              <p class="member-detail">PLACEHOLDER</p>
+            </div>
           </div>
         </div>
       </div>
@@ -370,10 +508,15 @@
     let lastSha = null;
     async function loadCommits(initialLoad = false) {
       const commitsDiv = document.getElementById('commits');
+      if (!commitsDiv) return;
+
       commitsDiv.setAttribute('data-loading', 'true');
+      commitsDiv.innerHTML = '<p>Yükleniyor...</p>';
 
       try {
         const response = await fetch('https://api.github.com/repos/Pepsiman9000/limbuscompanyturkishtranslation/commits');
+        if (!response.ok) throw new Error('API yanıt vermedi');
+        
         const commits = await response.json();
 
         if (!Array.isArray(commits)) {
@@ -419,7 +562,10 @@
         });
       } catch (error) {
         console.error('Commit yüklenirken hata oluştu:', error);
-        commitsDiv.innerHTML = '<p>Commit bilgileri yüklenirken bir hata oluştu.</p>';
+        commitsDiv.innerHTML = `
+          <p style="color: #ff5555">Commit bilgileri geçici olarak ulaşılamıyor.</p>
+          <button onclick="loadCommits(true)" style="background-color: #ff5555; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Tekrar Dene</button>
+        `;
       } finally {
         commitsDiv.setAttribute('data-loading', 'false');
       }
