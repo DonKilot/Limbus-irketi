@@ -73,132 +73,338 @@
       100% { transform: translate(0, 0); }
     }
 
-    /* YENİ EKLENEN STİLLER */
+    /* NAVIGATION STYLES */
+    nav {
+      background-color: rgba(31, 31, 31, 0.9);
+      padding: 15px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid #ff5555;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 10px 20px;
+      margin: 0 5px;
+      font-size: 1.1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      position: relative;
+    }
+    
+    nav a:hover {
+      background-color: rgba(255, 85, 85, 0.2);
+      color: #ff5555;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: #ff5555;
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 70%;
+    }
+
+    nav a.active {
+      background-color: rgba(255, 85, 85, 0.2);
+      color: #ff5555;
+    }
+
+    nav a.active::after {
+      width: 70%;
+    }
+
+    /* MAIN CONTENT STYLES */
+    main {
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      color: #ff5555;
+      font-size: 2.8em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px rgba(255, 85, 85, 0.7);
+      position: relative;
+      display: inline-block;
+      font-weight: bold;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ff5555, transparent);
+    }
+    
+    .tab {
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
     .center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      min-height: 70vh;
       padding: 50px 20px;
       max-width: 800px;
       margin: 0 auto;
     }
-
+    
     .logo {
-      max-width: 300px;
-      margin-bottom: 30px;
+      width: 220px;
+      margin-bottom: 40px;
+      filter: drop-shadow(0 0 10px rgba(255, 85, 85, 0.5));
     }
-
+    
     .main-title {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      color: #ff5555;
+      font-size: 3.2em;
+      font-weight: bold;
+      margin-bottom: 25px;
+      text-shadow: 0 0 20px rgba(255, 85, 85, 0.8);
+      letter-spacing: 1px;
     }
-
+    
     .subtitle {
-      font-size: 1.2em;
-      line-height: 1.6;
-      margin-bottom: 30px;
+      font-size: 1.4em;
+      max-width: 750px;
+      margin-bottom: 50px;
+      line-height: 1.7;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
     }
-
+    
     .download-btn {
       background-color: #ff5555;
       color: white;
+      font-size: 1.6em;
+      padding: 20px 50px;
       border: none;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
+      margin-bottom: 30px;
+      font-family: 'LimbusFont', Arial, sans-serif;
       transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(255, 85, 85, 0.5);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1px;
     }
-
+    
     .download-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(255, 85, 85, 0.3);
+      background-color: #ff3333;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 85, 85, 0.7);
     }
-
+    
+    .download-btn:active {
+      transform: translateY(2px);
+    }
+    
+    .version-info {
+      color: #aaa;
+      font-size: 1em;
+      margin-top: 25px;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Ekip Üyeleri Stili */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 25px;
-      margin-top: 30px;
+      margin-top: 40px;
     }
-
+    
     .team-member {
       background-color: rgba(30, 30, 30, 0.7);
-      padding: 20px;
+      padding: 25px;
       border-radius: 10px;
       text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid #333;
       backdrop-filter: blur(5px);
-      border-top: 3px solid #ff5555;
     }
-
+    
+    .team-member:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(255, 85, 85, 0.3);
+      border-color: #ff5555;
+    }
+    
     .member-avatar {
-      width: 80px;
-      height: 80px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
+      border: 3px solid #ff5555;
+      margin: 0 auto 20px;
       object-fit: cover;
-      margin-bottom: 15px;
+      box-shadow: 0 0 15px rgba(255, 85, 85, 0.4);
     }
-
+    
     .member-name {
       color: #ff5555;
-      margin: 10px 0;
+      margin: 15px 0 5px;
+      font-size: 1.3em;
     }
-
+    
     .member-role {
-      font-weight: bold;
-      margin-bottom: 5px;
+      margin: 5px 0;
+      font-size: 1.1em;
     }
-
+    
     .member-detail {
-      font-size: 0.9em;
       color: #aaa;
+      font-size: 0.95em;
+      margin-top: 10px;
     }
-
-    /* Nav düzenlemesi */
-    nav {
-      background-color: rgba(18, 18, 18, 0.8);
-      padding: 15px 0;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    
+    /* Commit Styles */
+    .commit {
+      display: flex;
+      align-items: center;
+      border: 1px solid #333;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      background-color: rgba(30, 30, 30, 0.7);
+      transition: all 0.3s ease;
       backdrop-filter: blur(5px);
     }
-
-    nav a {
-      color: #e0e0e0;
+    
+    .commit:hover {
+      border-color: #ff5555;
+      transform: translateX(8px);
+      box-shadow: 0 8px 20px rgba(255, 85, 85, 0.2);
+    }
+    
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 25px;
+      border: 2px solid #ff5555;
+    }
+    
+    .commit-details {
+      flex: 1;
+    }
+    
+    .commit a {
+      color: #8ab4f8;
       text-decoration: none;
-      margin: 0 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .commit a:hover {
+      color: #ff5555;
+      text-decoration: none;
+    }
+    
+    .commit strong {
+      color: #ff5555;
       font-size: 1.1em;
-      padding: 5px 10px;
+    }
+    
+    .commit em {
+      color: #aaa;
+      font-size: 0.95em;
+    }
+    
+    .commit-message {
+      margin-top: 8px;
+      display: block;
+      line-height: 1.5;
+      font-size: 1.05em;
+    }
+
+    /* News Items */
+    .news-item {
+      background-color: rgba(30, 30, 30, 0.7);
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      border-left: 5px solid #ff5555;
+      backdrop-filter: blur(5px);
       transition: all 0.3s ease;
     }
 
-    nav a:hover, nav a.active {
-      color: #ff5555;
-      border-bottom: 2px solid #ff5555;
+    .news-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 85, 85, 0.2);
     }
-
-    .tab {
-      padding: 20px;
-    }
-
-    /* Responsive tasarım */
+    
+    /* Responsive Design */
     @media (max-width: 768px) {
-      .center-content {
-        padding: 30px 15px;
+      nav {
+        flex-direction: column;
+        align-items: center;
       }
       
       nav a {
-        display: block;
-        margin: 10px 0;
+        margin: 5px 0;
+        padding: 8px 15px;
+        font-size: 1em;
+      }
+      
+      .main-title {
+        font-size: 2.4em;
+      }
+      
+      .subtitle {
+        font-size: 1.1em;
+        margin-bottom: 30px;
       }
       
       .team-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+      }
+      
+      .download-btn {
+        font-size: 1.3em;
+        padding: 15px 35px;
+      }
+      
+      .commit {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+      }
+      
+      .avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
       }
 
-      .main-title {
-        font-size: 2em;
+      .center-content {
+        padding: 30px 15px;
       }
     }
   </style>
@@ -252,12 +458,12 @@
       <div id="haberler" class="tab" style="display:none">
         <div class="center-content">
           <h1>Duyurular ve Haberler</h1>
-          <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ff5555; backdrop-filter: blur(5px);">
+          <div class="news-item">
             <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">Çeviri Projesi Başladı!</h3>
             <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">Limbus Company için Türkçe çeviri projemiz resmen başlamıştır. Çeviri ekibimizle tüm içerikler titizlikle çevrilmektedir. Gelişmeleri buradan takip edebilirsiniz.</p>
             <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">25 Mayıs 2025</small>
           </div>
-          <div class="news-item" style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ff5555; backdrop-filter: blur(5px);">
+          <div class="news-item">
             <h3 style="color: #ff5555; margin-top: 0; font-size: 1.5em;">CANTO 8!</h3>
             <p style="margin-bottom: 0; font-size: 1.1em; line-height: 1.6;">CANTO 8!CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8! CEVAP VER JIA BAOYU, HONGYUANIN NEYE IHTIYACI VAR!  CANTO 8! CANTO 8! CANTO 8! CANTO 8! CANTO 8!</p>
             <small style="color: #aaa; display: block; margin-top: 15px; font-size: 0.9em;">26 Mayıs 2025</small>
@@ -269,7 +475,7 @@
         <div class="center-content">
           <h1>Sürüm Geçmişi</h1>
           <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-top: 30px;">
-            <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+            <div class="news-item" style="border-top: 5px solid #ff5555; border-left: none;">
               <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.2.0</h3>
               <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
                 <li>Yeni bölümler eklendi</li>
@@ -283,7 +489,7 @@
                       onclick="window.location.href='discord.gg/ayprojesiturkiye'">İndir</button>
             </div>
             
-            <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+            <div class="news-item" style="border-top: 5px solid #ff5555; border-left: none;">
               <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.1.0</h3>
               <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
                 <li>Falan Filan</li>
@@ -296,7 +502,7 @@
                       onclick="window.location.href='https://discord.gg/ayprojesiturkiye'">İndir</button>
             </div>
             
-            <div style="background-color: rgba(30, 30, 30, 0.7); padding: 25px; border-radius: 10px; border-top: 5px solid #ff5555; backdrop-filter: blur(5px);">
+            <div class="news-item" style="border-top: 5px solid #ff5555; border-left: none;">
               <h3 style="color: #ff5555; margin-top: 0; font-size: 1.4em;">v1.0.0</h3>
               <ul style="padding-left: 25px; font-size: 1.05em; line-height: 1.7;">
                 <li>Falan Filan</li>
