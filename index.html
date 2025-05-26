@@ -72,6 +72,84 @@
       80% { transform: translate(10px, -5px); }
       100% { transform: translate(0, 0); }
     }
+        /* FAQ Styles */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-search-container {
+      margin-bottom: 30px;
+    }
+
+    .faq-category {
+      margin-bottom: 40px;
+    }
+
+    .faq-category-title {
+      color: #ff5555;
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #ff5555;
+    }
+
+    .faq-item {
+      background-color: rgba(30, 30, 30, 0.7);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      border-left: 4px solid #ff5555;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question {
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2em;
+    }
+
+    .faq-question:hover {
+      background-color: rgba(255, 85, 85, 0.1);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 20px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 1000px;
+      padding: 0 20px 20px;
+    }
+
+    .faq-media-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .faq-media {
+      max-width: 100%;
+      border-radius: 5px;
+      border: 1px solid #444;
+    }
+
+    .faq-toggle {
+      color: #ff5555;
+      font-size: 1.5em;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+    }
 
     /* NAVIGATION STYLES */
     nav {
@@ -712,7 +790,144 @@
     </main>
   </div>
 
+
+    <div id="surumler" class="tab" style="display:none">
+    <div class="center-content">
+      <h1>Sıkça Sorulan Sorular</h1>
+      <div class="faq-container">
+        <div class="faq-search-container">
+          <input type="text" class="search-bar" placeholder="SSS'lerde ara..." id="faqSearch">
+        </div>
+
+        <div class="faq-category">
+          <h2 class="faq-category-title">Yükleme & Kurulum</h2>
+          
+          <div class="faq-item" data-category="yükleme">
+            <div class="faq-question">
+              <span>Çeviri paketini nasıl yüklerim?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Çeviri paketini yüklemek için aşağıdaki adımları izleyin:</p>
+              <ol>
+                <li>Son sürümü indirin</li>
+                <li>Zip dosyasını çıkarın</li>
+                <li>Oyun dizinine kopyalayın</li>
+              </ol>
+              <div class="faq-media-container">
+                <img src="assets/images/installation1.jpg" alt="Kurulum adımı 1" class="faq-media">
+                <img src="assets/images/installation2.jpg" alt="Kurulum adımı 2" class="faq-media">
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-category="yükleme">
+            <div class="faq-question">
+              <span>Hata alıyorum, ne yapmalıyım?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>En yaygın hatalar ve çözümleri:</p>
+              <ul>
+                <li>Oyunu yönetici olarak çalıştırın</li>
+                <li>Antivirüsünüzü kontrol edin</li>
+                <li>Discord'dan yardım isteyin</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-category">
+          <h2 class="faq-category-title">Çeviri Problemleri</h2>
+          
+          <div class="faq-item" data-category="çeviri">
+            <div class="faq-question">
+              <span>Bazı metinler hala İngilizce görünüyor</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Bu durum genellikle:</p>
+              <ul>
+                <li>Oyunun yeni güncellemesiyle eklenen metinler</li>
+                <li>Çevirisi henüz tamamlanmamış bölümler</li>
+              </ul>
+              <p>Çözüm için lütfen bekleyin veya Discord'dan durumu bildirin.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-category="çeviri">
+            <div class="faq-question">
+              <span>Çeviriyi nasıl güncellerim?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Yeni sürüm çıktığında:</p>
+              <ol>
+                <li>Eski dosyaları silin</li>
+                <li>Yeni dosyaları yükleyin</li>
+                <li>Oyunu yeniden başlatın</li>
+              </ol>
+              <div class="faq-media-container">
+                <video controls class="faq-media">
+                  <source src="assets/videos/update-tutorial.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-category">
+          <h2 class="faq-category-title">Diğer Sorular</h2>
+          
+          <div class="faq-item" data-category="diğer">
+            <div class="faq-question">
+              <span>Çeviri ekibine nasıl katılırım?</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              <p>Çeviri ekibine katılmak için:</p>
+              <ol>
+                <li>Discord sunucumuza katılın</li>
+                <li>#başvurular kanalına yazın</li>
+                <li>Test çevirinizi gönderin</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+
+      // FAQ Search
+      const faqSearch = document.getElementById('faqSearch');
+      faqSearch.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        document.querySelectorAll('.faq-item').forEach(item => {
+          const question = item.querySelector('.faq-question span:first-child').textContent.toLowerCase();
+          const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+          
+          if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+            item.style.display = 'block';
+            
+            // Show parent category if hidden
+            item.closest('.faq-category').style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        // Hide empty categories
+        document.querySelectorAll('.faq-category').forEach(category => {
+          const visibleItems = category.querySelectorAll('.faq-item[style="display: block"]');
+          if (visibleItems.length === 0) {
+            category.style.display = 'none';
+          }
+        });
+      });
+    });
+    
     // Video kontrolü
     document.addEventListener('DOMContentLoaded', function() {
       const video = document.getElementById('video-background');
