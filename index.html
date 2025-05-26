@@ -286,16 +286,9 @@
     }
     
     /* Commit Styles */
-    .commits-container {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
     .commit {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       border: 1px solid #333;
       padding: 20px;
       margin: 20px 0;
@@ -317,7 +310,6 @@
       border-radius: 50%;
       margin-right: 25px;
       border: 2px solid #ff5555;
-      flex-shrink: 0;
     }
     
     .commit-details {
@@ -411,39 +403,7 @@
       font-size: 1.2em;
       margin-top: 30px;
     }
-
-    /* Loading spinner */
-    .loading-spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255, 85, 85, 0.3);
-      border-radius: 50%;
-      border-top-color: #ff5555;
-      animation: spin 1s ease-in-out infinite;
-      margin-right: 10px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .load-more {
-      background-color: rgba(255, 85, 85, 0.2);
-      color: #ff5555;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      margin: 20px auto;
-      display: block;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .load-more:hover {
-      background-color: rgba(255, 85, 85, 0.4);
-    }
-
+    
     /* Responsive Design */
     @media (max-width: 1200px) {
       .team-grid {
@@ -554,12 +514,9 @@
           <h1>Son Proje Güncellemeleri</h1>
           <p style="margin-bottom: 25px; font-size: 1.1em;">Günâhla yüzleş, E.G.O'yu kurtar.</p>
           <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Commitlerde ara..." oninput="searchCommits(this.value)">
+            <input type="text" class="search-bar" placeholder="Yazı falan yaz." oninput="searchCommits(this.value)">
           </div>
-          <div class="commits-container">
-            <div id="commits">Yükleniyor...</div>
-            <button id="load-more" class="load-more" style="display: none;">Daha Fazla Yükle</button>
-          </div>
+          <div id="commits">Yükleniyor...</div>
         </div>
       </div>
 
@@ -684,7 +641,7 @@
               <img src="https://avatars.githubusercontent.com/u/209387939?v=4" alt="Çevirmen" class="member-avatar">
               <h3 class="member-name">mox</h3>
               <p class="member-role">Çevirmen</p>
-              <p class="member-detail">1# numaralı Gregor havalandırma sistemi/p>
+              <p class="member-detail">1# Numaralı Pregor fanı.</p>
             </div>
             
             <div class="team-member">
@@ -768,14 +725,6 @@
         document.body.style.backgroundPosition = 'center';
         video.style.display = 'none';
       });
-
-      // M tuşu ile ses aç/kapa
-      document.addEventListener('keydown', function(e) {
-        if (e.code === 'KeyM') {
-          video.muted = !video.muted;
-          alert('Video sesi ' + (video.muted ? 'kapalı' : 'açık'));
-        }
-      });
     });
 
     // IDEAL jumpscare
@@ -821,198 +770,144 @@
       });
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Commitler sekmesi açıldığında commitleri yükle
-      if (tabId === 'commitler') {
-        loadCommits(true);
-      }
     }
 
     // Commit yükleme fonksiyonu
-    let commitsPage = 1;
-    let isLoadingCommits = false;
-    let allCommitsLoaded = false;
+     let lastSha = null;
     let allCommits = [];
+    let allCommitsLoaded = false;
+
+    async function loadAllCommits() {
+        let page = 1;
+        let commits = [];
+        let hasMore = true;
+        
+        while (hasMore) {
+            try {
+                const response = await fetch(`https://api.github.com/repos/Pepsiman9000/limbuscompanyturkishtranslation/commits?per_page=100&page=${page}`);
+                if (!response.ok) throw new Error('API yanıt vermedi');
+                
+                const newCommits = await response.json();
+                if (newCommits.length === 0) {
+                    hasMore = false;
+                } else {
+                    commits = commits.concat(newCommits);
+                    page++;
+                }
+            } catch (error) {
+                console.error('Commit yüklenirken hata oluştu:', error);
+                hasMore = false;
+            }
+        }
+        
+        allCommits = commits;
+        allCommitsLoaded = true;
+        return commits;
+    }
 
     async function loadCommits(initialLoad = false) {
-      if (isLoadingCommits || allCommitsLoaded) return;
-      
-      isLoadingCommits = true;
-      const commitsDiv = document.getElementById('commits');
-      const loadMoreBtn = document.getElementById('load-more');
-      
-      if (!commitsDiv) return;
+        const commitsDiv = document.getElementById('commits');
+        if (!commitsDiv) return;
 
-      try {
-        if (initialLoad) {
-          commitsDiv.innerHTML = '<div style="text-align: center;"><span class="loading-spinner"></span>Yükleniyor...</div>';
-          commitsPage = 1;
-          allCommitsLoaded = false;
-          allCommits = [];
+        if (!allCommitsLoaded) {
+            commitsDiv.innerHTML = '<p>Tüm commitler yükleniyor... (400+ commit, lütfen bekleyin)</p>';
+            await loadAllCommits();
         }
 
-        const perPage = initialLoad ? 15 : 10;
-        const response = await fetch(`https://api.github.com/repos/Pepsiman9000/limbuscompanyturkishtranslation/commits?page=${commitsPage}&per_page=${perPage}`);
-        
-        if (!response.ok) throw new Error('API yanıt vermedi');
-        
-        const commits = await response.json();
-
-        if (!Array.isArray(commits)) {
-          commitsDiv.innerHTML = '<p>Commit bilgileri alınamadı.</p>';
-          return;
-        }
-
-        if (commits.length === 0) {
-          allCommitsLoaded = true;
-          loadMoreBtn.style.display = 'none';
-          if (commitsPage === 1) {
-            commitsDiv.innerHTML = '<p>Henüz commit bulunmamaktadır.</p>';
-          }
-          return;
-        }
-
-        // Tüm commitleri sakla
-        allCommits = [...allCommits, ...commits];
-
-        if (initialLoad) {
-          commitsDiv.innerHTML = '';
-        }
-
-        renderCommits(allCommits);
-
-        commitsPage++;
-        loadMoreBtn.style.display = commits.length >= perPage ? 'block' : 'none';
-      } catch (error) {
-        console.error('Commit yüklenirken hata oluştu:', error);
-        commitsDiv.innerHTML = '<p>Commit bilgileri yüklenirken bir hata oluştu.</p>';
-      } finally {
-        isLoadingCommits = false;
-      }
+        displayCommits(allCommits.slice(0, 5));
     }
 
-    // Commitleri render etme fonksiyonu
-    function renderCommits(commitsToRender) {
-      const commitsDiv = document.getElementById('commits');
-      commitsDiv.innerHTML = '';
+    function displayCommits(commitsToShow) {
+        const commitsDiv = document.getElementById('commits');
+        if (!commitsDiv) return;
 
-      commitsToRender.forEach(commit => {
-        const author = commit.author || {};
-        const committer = commit.committer || {};
-        const avatarUrl = author.avatar_url || 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';
-        const authorName = commit.commit.author.name;
-        const authorLink = author.html_url || '#';
-        const date = new Date(commit.commit.author.date).toLocaleString('tr-TR', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
+        commitsDiv.innerHTML = '';
+
+        if (commitsToShow.length === 0) {
+            commitsDiv.innerHTML = '<p>Sonuç bulunamadı.</p>';
+            return;
+        }
+
+        commitsToShow.forEach(commit => {
+            const author = commit.author || {};
+            const committer = commit.committer || {};
+            const avatarUrl = author.avatar_url || 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';
+            const authorName = commit.commit.author.name;
+            const authorLink = author.html_url || '#';
+            const date = new Date(commit.commit.author.date).toLocaleString('tr-TR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const div = document.createElement('div');
+            div.className = 'commit';
+            div.innerHTML = `
+                <img src="${avatarUrl}" alt="Avatar" class="avatar" onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
+                <div class="commit-details">
+                    <strong><a href="${authorLink}" target="_blank">${authorName}</a></strong> - 
+                    <em>${date}</em>
+                    <a href="${commit.html_url}" target="_blank" class="commit-message">${commit.commit.message}</a>
+                </div>
+            `;
+            commitsDiv.appendChild(div);
         });
-
-        const div = document.createElement('div');
-        div.className = 'commit';
-        div.setAttribute('data-message', commit.commit.message.toLowerCase());
-        div.setAttribute('data-author', authorName.toLowerCase());
-        div.innerHTML = `
-          <img src="${avatarUrl}" alt="Avatar" class="avatar" onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
-          <div class="commit-details">
-            <strong><a href="${authorLink}" target="_blank">${authorName}</a></strong> - 
-            <em>${date}</em>
-            <a href="${commit.html_url}" target="_blank" class="commit-message">${commit.commit.message}</a>
-          </div>
-        `;
-        commitsDiv.appendChild(div);
-      });
     }
 
-    // Commit arama fonksiyonu
     function searchCommits(query) {
-      const commitsDiv = document.getElementById('commits');
-      const commitItems = commitsDiv.querySelectorAll('.commit');
-      let foundAny = false;
-      
-      query = query.toLowerCase().trim();
-      
-      commitItems.forEach(item => {
-        const message = item.getAttribute('data-message');
-        const author = item.getAttribute('data-author');
-        
-        if (query === '' || message.includes(query) || author.includes(query)) {
-          item.style.display = 'flex';
-          foundAny = true;
-        } else {
-          item.style.display = 'none';
+        if (!allCommitsLoaded) {
+            alert('Tüm commitler henüz yüklenmedi. Lütfen bekleyin...');
+            return;
         }
-      });
-      
-      // Eğer hiç sonuç bulunamadıysa mesaj göster
-      const notFoundMessage = commitsDiv.querySelector('.not-found');
-      if (!foundAny && query !== '') {
-        if (!notFoundMessage) {
-          const message = document.createElement('p');
-          message.className = 'not-found';
-          message.textContent = `"${query}" ile eşleşen commit bulunamadı.`;
-          commitsDiv.appendChild(message);
-        } else {
-          notFoundMessage.textContent = `"${query}" ile eşleşen commit bulunamadı.`;
-          notFoundMessage.style.display = 'block';
-        }
-      } else if (notFoundMessage) {
-        notFoundMessage.style.display = 'none';
-      }
-    }
 
-    // Duyuru arama fonksiyonu
-    function searchNews(query) {
-      const newsContainer = document.getElementById('news-container');
-      const newsItems = newsContainer.querySelectorAll('.news-item');
-      let foundAny = false;
-      
-      query = query.toLowerCase().trim();
-      
-      newsItems.forEach(item => {
-        const title = item.getAttribute('data-title').toLowerCase();
-        const content = item.getAttribute('data-content').toLowerCase();
-        
-        if (query === '' || title.includes(query) || content.includes(query)) {
-          item.style.display = 'block';
-          foundAny = true;
-        } else {
-          item.style.display = 'none';
+        query = query.trim();
+        if (!query) {
+            displayCommits(allCommits.slice(0, 5));
+            return;
         }
-      });
-      
-      // Eğer hiç sonuç bulunamadıysa mesaj göster
-      const notFoundMessage = newsContainer.querySelector('.not-found');
-      if (!foundAny && query !== '') {
-        if (!notFoundMessage) {
-          const message = document.createElement('p');
-          message.className = 'not-found';
-          message.textContent = `"${query}" ile eşleşen duyuru bulunamadı.`;
-          newsContainer.appendChild(message);
-        } else {
-          notFoundMessage.textContent = `"${query}" ile eşleşen duyuru bulunamadı.`;
-          notFoundMessage.style.display = 'block';
+
+        // Tarih arama (*DATE formatı)
+        if (query.startsWith('*')) {
+            const dateQuery = query.substring(1).toUpperCase();
+            const filteredCommits = allCommits.filter(commit => {
+                const commitDate = new Date(commit.commit.author.date).toLocaleString('tr-TR', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric'
+                }).toUpperCase();
+                return commitDate.includes(dateQuery);
+            });
+            displayCommits(filteredCommits);
+            return;
         }
-      } else if (notFoundMessage) {
-        notFoundMessage.style.display = 'none';
-      }
+
+        // Tırnak içinde isim arama
+        const quotedNameMatch = query.match(/^"([^"]+)"$/);
+        if (quotedNameMatch) {
+            const nameToSearch = quotedNameMatch[1].toLowerCase();
+            const filteredCommits = allCommits.filter(commit => 
+                commit.commit.author.name.toLowerCase().includes(nameToSearch)
+            );
+            displayCommits(filteredCommits);
+            return;
+        }
+
+        // Normal arama (mesaj + isim)
+        const searchTerm = query.toLowerCase();
+        const filteredCommits = allCommits.filter(commit => 
+            commit.commit.message.toLowerCase().includes(searchTerm) ||
+            commit.commit.author.name.toLowerCase().includes(searchTerm)
+        );
+        displayCommits(filteredCommits);
     }
 
     // Sayfa yüklendiğinde
     window.onload = function() {
-      showTab('anasayfa');
-      
-      // Load more butonuna event listener ekle
-      document.getElementById('load-more')?.addEventListener('click', () => loadCommits());
-      
-      // Scroll ile daha fazla commit yükleme
-      window.addEventListener('scroll', function() {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
-          loadCommits();
-        }
-      });
+        showTab('anasayfa');
+        loadCommits(true);
+        setInterval(() => loadCommits(false), 69000); // Her 69 (nice) saniyede bir kontrol et
     };
   </script>
 </body>
